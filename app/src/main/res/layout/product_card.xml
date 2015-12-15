@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/header_readylist"
+        android:layout_marginLeft="40dp"
+        android:textAlignment="center"
+        android:typeface="sans"
+        android:gravity="center_horizontal"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+        android:hint="@string/editMoney_header"
+        android:textStyle="bold"
+        android:layout_alignParentEnd="false"
+        android:maxLength="20"
+        android:maxLines="1" />
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview_readylist"
+        android:layout_above="@+id/moneyOk_readylist"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/editMoney_readylist"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:hint="@string/editMoney_readylist"
+        android:layout_toLeftOf="@+id/moneyOk_readylist"
+        android:numeric="decimal"
+        android:singleLine="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OK"
+        android:layout_weight="1"
+        android:id="@+id/moneyOk_readylist"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
+
+    <ImageButton
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/btnclock"
+        android:src="@drawable/my_calendar_off"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:foregroundGravity="center"
+        android:layout_alignWithParentIfMissing="false"
+
+        android:layout_alignLeft="@+id/header_readylist"
+        android:layout_below="@+id/header_readylist"
+        android:layout_marginRight="10dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_mylocation"
+        android:id="@+id/btnNavigation"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:foregroundGravity="center"
+        android:layout_below="@+id/header_readylist"
+        android:layout_toRightOf="@+id/btnclock"
+        android:layout_toEndOf="@+id/btnclock"
+        android:layout_marginRight="10dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnGallery"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:src="@android:drawable/ic_menu_gallery"
+        android:foregroundGravity="center"
+        android:layout_toStartOf="@+id/btnCamera"
+        android:layout_below="@+id/header_readylist"
+        android:layout_marginRight="10dp"
+        android:layout_toRightOf="@+id/btnNavigation" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textView1"
+        android:layout_alignParentRight="false"
+        android:layout_below="@+id/btnclock"
+        android:layout_marginTop="20dp"
+        android:layout_alignLeft="@+id/btnclock" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCamera"
+        android:layout_weight="2"
+        android:layout_gravity="center"
+        android:src="@android:drawable/ic_menu_camera"
+        android:foregroundGravity="center"
+        android:layout_below="@+id/header_readylist"
+
+        android:layout_alignParentEnd="false"
+        android:layout_alignRight="@+id/header_readylist" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_alignTop="@+id/listview_readylist"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_alignStart="@+id/textView1" />
+
+</RelativeLayout>
