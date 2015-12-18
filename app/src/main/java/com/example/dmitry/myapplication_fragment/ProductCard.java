@@ -17,11 +17,14 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -30,14 +33,17 @@ import java.util.Calendar;
 public class ProductCard extends AppCompatActivity implements AdapterView.OnItemClickListener {
     final String LOG_TAG = "myLogs";
     Button moneyOk_readylist;
-    ImageButton btnclock,btnGallery;
+    ImageButton btnclock,btnNavigation;
     EditText header_readylist,editMoney_readylist;
     DataBase db;
     TextView txt1;
     Person person;
     String header,edittext,mmuri;
-    ImageView imageView;
+    ListView listView;
     Uri myUri;
+    Items items;
+    ListAdap myListAdapter;
+    ArrayList<Items> arrItems;
 //    Spinner spinner;
     int DIALOG_DATE = 1;
     int myYear = 2015;
@@ -48,13 +54,19 @@ public class ProductCard extends AppCompatActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_card);
+        arrItems= new ArrayList<Items>();
         moneyOk_readylist=(Button)findViewById(R.id.moneyOk_readylist);
         header_readylist=(EditText)findViewById(R.id.header_readylist);
         editMoney_readylist=(EditText)findViewById(R.id.editMoney_readylist);
+        btnNavigation=(ImageButton)findViewById(R.id.btnNavigation);
+        listView=(ListView)findViewById(R.id.listview_readylist);
+        myListAdapter=new ListAdap(this,arrItems);
+        listView.setAdapter(myListAdapter);
+
         db = new DataBase(this);
         txt1=(TextView)findViewById(R.id.textView1);
-        imageView=(ImageView)findViewById(R.id.imageView);
-        btnGallery=(ImageButton)findViewById(R.id.btnGallery);
+
+
         //ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
         //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        spinner=(Spinner)findViewById(R.id.spinner);
@@ -70,6 +82,16 @@ public class ProductCard extends AppCompatActivity implements AdapterView.OnItem
 //
 //            }
 //        });
+        btnNavigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = editMoney_readylist.getText().toString().trim();
+                items=new Items(editMoney_readylist.getText().toString());
+                arrItems.add(items);
+                myListAdapter.notifyDataSetChanged();
+                editMoney_readylist.setText(" ");
+            }
+        });
         btnclock=(ImageButton)findViewById(R.id.btnclock);
         btnclock.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,22 +127,12 @@ public class ProductCard extends AppCompatActivity implements AdapterView.OnItem
 //                return false;
 //            }
 //        });
-        btnGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                i.setType("image/*");
-                //i.setAction(Intent.ACTION_PICK);
-                startActivityForResult(Intent.createChooser(i,"Select picture"),1);
 
-            }
-        });
         moneyOk_readylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 header = header_readylist.getText().toString();
-                edittext = editMoney_readylist.getText().toString();
+//                edittext = editMoney_readylist.getText().toString();
                 person = new Person(header, edittext, mmuri);
                 db.addPerson(person);
                 Intent intent = new Intent(ProductCard.this, MainActivity.class);
@@ -173,7 +185,7 @@ public class ProductCard extends AppCompatActivity implements AdapterView.OnItem
             // Let's read picked image data - its URI
            myUri=data.getData();
            mmuri=myUri.toString();
-           imageView.setImageURI(data.getData());
+           //imageView.setImageURI(data.getData());
         }
 
 
@@ -199,6 +211,13 @@ public class ProductCard extends AppCompatActivity implements AdapterView.OnItem
                 Toast.makeText(ProductCard.this, "Карточка удалена", Toast.LENGTH_SHORT).show();
                 Intent intent2=new Intent(ProductCard.this,MainActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.action_cover_card:
+                Intent i = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                i.setType("image/*");
+                //i.setAction(Intent.ACTION_PICK);
+                startActivityForResult(Intent.createChooser(i, "Select picture"), 1);
                 break;
 
         }

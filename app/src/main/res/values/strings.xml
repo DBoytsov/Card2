@@ -5,4 +5,5 @@
     <string name="action_save_card">Сохранить</string>
     <string name="editMoney_readylist">Итого:</string>
     <string name="editMoney_header">Название покупки</string>
+    <string name="cover">Сменить обложку</string>
 </resources>

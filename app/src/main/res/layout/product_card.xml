@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:text="New Button"
         android:id="@+id/btnclock"
-        android:src="@drawable/my_calendar_off"
+        android:src="@android:drawable/ic_menu_my_calendar"
         android:layout_gravity="center"
         android:layout_weight="2"
         android:foregroundGravity="center"
@@ -67,7 +67,7 @@
 
         android:layout_alignLeft="@+id/header_readylist"
         android:layout_below="@+id/header_readylist"
-        android:layout_marginRight="10dp" />
+        android:layout_alignBottom="@+id/btnNavigation" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -81,19 +81,6 @@
         android:layout_toRightOf="@+id/btnclock"
         android:layout_toEndOf="@+id/btnclock"
         android:layout_marginRight="10dp" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnGallery"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:src="@android:drawable/ic_menu_gallery"
-        android:foregroundGravity="center"
-        android:layout_toStartOf="@+id/btnCamera"
-        android:layout_below="@+id/header_readylist"
-        android:layout_marginRight="10dp"
-        android:layout_toRightOf="@+id/btnNavigation" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -117,13 +104,5 @@
 
         android:layout_alignParentEnd="false"
         android:layout_alignRight="@+id/header_readylist" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:layout_alignTop="@+id/listview_readylist"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_alignStart="@+id/textView1" />
 
 </RelativeLayout>

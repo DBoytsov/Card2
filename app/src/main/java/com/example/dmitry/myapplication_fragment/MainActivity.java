@@ -11,9 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     final String LOG_TAG = "myLogs";
     Person person;
     RVAdapter adapter;
+    //ImageView imageOk;
+    LayoutInflater nn;
 
 
 
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         rv = (RecyclerView)findViewById(R.id.rv);
         rv.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -51,25 +56,14 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(LOG_TAG, "restore card with persons" + persons);
                 }
 
-
-
-        adapter.setOnItemClickListener(new RVAdapter.MyClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                Toast.makeText(MainActivity.this, "push on item" + position, Toast.LENGTH_SHORT).show();
-                person=(Person)adapter.getItem(position);
-                Intent intent2 = new Intent(MainActivity.this, ProductCard.class);
-                //MainActivity.this, ProductCard.class
-                intent2.putExtra("person",person);
-                startActivity(intent2);
-                Log.d(LOG_TAG, "go to ProductCard class" +" "+ person.getId());
-            }
-
-        });
         adapter.setOnItemLongClickListener(new RVAdapter.MyLongClickListener() {
+
+
             @Override
-            public void onItemLongClick(int position, View v) {
+            public boolean onItemLongClick(int position, View v) {
                 Toast.makeText(MainActivity.this, "push on item long" + position, Toast.LENGTH_SHORT).show();
+                return true;
+
                 //person=(Person)adapter.getItem(position);
                 //persons.remove(person);
 
@@ -81,14 +75,29 @@ public class MainActivity extends AppCompatActivity {
                 //persons=db.getAllPersons();
                 //adapter = new RVAdapter(persons);
                 //rv.setAdapter(adapter);
-               // adapter.notifyDataSetChanged();
+                // adapter.notifyDataSetChanged();
 //              getFromDB();
-                Log.d(LOG_TAG, "Removed " + position + " " + person.getId());
+                // Log.d(LOG_TAG, "Removed " + position + " " + person.getId());
 
                 //db.deleteProduct((Person) adapter.getItem(position));
                 //getFromDB();
             }
         });
+
+        adapter.setOnItemClickListener(new RVAdapter.MyClickListener() {
+            @Override
+            public void onItemClick(int position, View v) {
+                Toast.makeText(MainActivity.this, "push on item" + position, Toast.LENGTH_SHORT).show();
+                person = (Person) adapter.getItem(position);
+                Intent intent2 = new Intent(MainActivity.this, ProductCard.class);
+                //MainActivity.this, ProductCard.class
+                intent2.putExtra("person", person);
+                startActivity(intent2);
+                Log.d(LOG_TAG, "go to ProductCard class" + " " + person.getId());
+            }
+
+        });
+
 
 
         setSupportActionBar(toolbar);

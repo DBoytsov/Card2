@@ -61,12 +61,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
         TextView personName;
         TextView personAge;
         ImageView personPhoto;
+        ImageView imageOk;
         PersonViewHolder(View itemView) {
             super(itemView);
             cv = (CardView)itemView.findViewById(R.id.cv);
             personName = (TextView)itemView.findViewById(R.id.person_name);
             personAge = (TextView)itemView.findViewById(R.id.person_age);
             personPhoto = (ImageView)itemView.findViewById(R.id.person_photo);
+            imageOk=(ImageView)itemView.findViewById(R.id.imageOK);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
@@ -78,10 +80,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
         @Override
         public boolean onLongClick(View v) {
             myLongClickListener.onItemLongClick(getAdapterPosition(), v);
-            return false;
+            imageOk.setVisibility(View.VISIBLE);
+            return true;
         }
-    }
 
+
+
+}
 
     public void setOnItemClickListener(MyClickListener myClickListener) {
         this.myClickListener = myClickListener;
@@ -94,7 +99,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.PersonViewHolder>{
         public void onItemClick(int position, View v);
     }
     public interface MyLongClickListener{
-        public void onItemLongClick(int position, View v);
+        public boolean onItemLongClick(int position, View v);
+
+
     }
 
 }
